@@ -8,7 +8,7 @@
 #define OFF 0
 #define PIN_RELAY 17 
 #define TEMPERATURE_REQUESTED 25
-#define DELAY 60000*5-19
+#define DELAY 1000
 
 char * pathToSensorFile = "/sys/bus/w1/devices/28-000008d6b7f8/w1_slave" ;
 char * pathToLogFile = "/media/pi/KINGSTON/log.txt";
@@ -71,7 +71,7 @@ int main(){
 
 	float actualTemp;
 	
-	while(1){
+	//while(1){
 	clock_t start = clock();
 		actualTemp = readData();
 		if( actualTemp < TEMPERATURE_REQUESTED ){
@@ -81,10 +81,12 @@ int main(){
 			onOffRelay(PIN_RELAY, OFF);
 		}
 		WriteDataToFile(actualTemp);	
+	clock_t end=clock();
+	printf("\n%f", (float)(end-start)/CLOCKS_PER_SEC );
 		delay(DELAY);
 	
 
-	}	
+	//}	
 	return 0;		
 	
 }
