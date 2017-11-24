@@ -64,6 +64,7 @@ void WriteDataToFile(float data){
 	time_t nowTime;
 	time( & nowTime);
 	fprintf(fpointer, "%.1f  [st. C], date:  %s", data, ctime( & nowTime));
+	fclose(fpointer);
 }
 	
 
