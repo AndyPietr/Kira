@@ -1,40 +1,18 @@
-Przechodząc do konkretów: aby aktywować dostęp do jakiegoś pinu, należy go „wyeksportować”, czyli wpisać jego numer (w nomenklaturze układu SoC, patrz Tab. 2. w pierwszej części artykułu). Dlatego jeżeli chcemy ustawić stan wysoki na GPIO_GEN0, to tak naprawdę będziemy manipulować pinem GPIO17. Najpierw jednak przechodzimy do trybu super user:
-C
-sudo su
-1
-
+Przechodząc do konkretów: aby aktywować dostęp do jakiegoś pinu, należy go „wyeksportować”, czyli wpisać jego numer (w nomenklaturze układu SoC, patrz Tab. 2. w pierwszej części artykułu). Dlatego jeżeli chcemy ustawić stan wysoki na GPIO_GEN0, to tak naprawdę będziemy manipulować pinem GPIO17. Najpierw jednak przechodzimy do trybu super user
 sudo su
 Następnie „eksportujemy” pin 17:
-C
-echo 17 > /sys/class/gpio/export
-1
-
 echo 17 > /sys/class/gpio/export
 
 Teraz w /sys/class/gpio pojawił się katalog gpio17, a w nim kilka nowych plików, umożliwiających różne rodzaje działań: od ustawienia kierunku pinu (wejście/wyjście) po rodzaj zbocza, przy którym ma być zgłaszane przerwanie. My jednak ograniczymy się do zwykłej kontroli binarnej, ustawiając najpierw GPIO17 jako wyjście:
-C
 echo out > /sys/class/gpio/gpio17/direction
-1
 
-echo out > /sys/class/gpio/gpio17/direction
 Ustawienie stanu wysokiego:
-C
-echo 1 > /sys/class/gpio/gpio17/value
-1
-
 echo 1 > /sys/class/gpio/gpio17/value
 
-Teraz miernik w dłoń i podziwiamy naszą władzę nad Raspberry Pi. Aby zakończyć korzystanie z pinu należy go „odeksportować”:
-C
-echo 17 > /sys/class/gpio/unexport
-1
-
+Aby zakończyć korzystanie z pinu należy go „odeksportować”:
 echo 17 > /sys/class/gpio/unexport
 
-Taki dostęp może jest prosty i szybki od strony użytkownika, jednak z perspektywy czasu wykonywania instrukcji to programistyczna porażka. Głównie z tego względu, że procesor musi się zajmować czymś, co może zrobić sprzętowo – czytając/pisząc w odpowiednich adresach pamięci układu Broadcom.
 
-Owe adresy można znaleźć we wspomnianej w pierwszej części artykułu nocie katalogowej układu SoC. My jednak wykorzystamy do tego bibliotekę wiringPi. Poniżej przykład wykorzystania wszystkich funkcji dotyczących prostej manipulacji GPIO:
-C
 #include <stdio.h> 
 #include <wiringPi.h> 
 
@@ -70,43 +48,7 @@ int main(int argc, char **argv)
 
     return 0; 
 }
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
+
 
 #include <stdio.h> 
 #include <wiringPi.h> 
