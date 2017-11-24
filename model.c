@@ -26,6 +26,10 @@ float readData() {
 	return liczba;
 }
 
+short onOffRelay(short oneOrZero){
+
+
+}
 
 int main(){
 
