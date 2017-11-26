@@ -8,7 +8,7 @@
 #define OFF 0
 #define PIN_RELAY 17 
 #define TEMPERATURE_REQUESTED 25
-#define DELAY 60000*5-19
+#define DELAY 60000*2-19
 
 char * pathToSensorFile = "/sys/bus/w1/devices/28-000008d6b7f8/w1_slave" ;
 char * pathToLogFile = "/media/pi/KINGSTON/log.txt";
